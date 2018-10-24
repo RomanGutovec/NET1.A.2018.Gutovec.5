@@ -156,5 +156,17 @@ namespace PolynomialLib.Tests
             Polynomial testTosrting = new Polynomial(coefficients);
             return testTosrting.ToString();
         }
+
+        [TestCase(new double[] { 7.3 }, new double[] { 7.3 }, ExpectedResult = true)]
+        [TestCase(new double[] { 17, 3 }, new double[] { 17.3 }, ExpectedResult = false)]
+        [TestCase(new double[] { 1.5, 4, 5 }, new double[] { 1.5, 5, 4 }, ExpectedResult = false)]
+        [TestCase(new double[] { 17, -2, 3.4 }, new double[] { 17, -2, 3.4 }, ExpectedResult = true)]
+        public bool OperatorEquals_ReturnsTrueOrFalse(double[] coefficientsFirst, double[] coefficientsSecond)
+        {
+            Polynomial testPolynomialFirst = new Polynomial(coefficientsFirst);
+            Polynomial testPolynomialSecond = new Polynomial(coefficientsSecond);
+
+            return testPolynomialFirst.Equals(testPolynomialSecond);
+        }
     }
 }

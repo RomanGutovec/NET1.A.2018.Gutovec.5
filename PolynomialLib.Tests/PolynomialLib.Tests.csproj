@@ -61,7 +61,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\PolinomialLib\PolynomialLib.csproj">
+    <ProjectReference Include="..\PolynomialLib\PolynomialLib.csproj">
       <Project>{1d2dfc25-8055-4d95-bf30-580a4519680a}</Project>
       <Name>PolynomialLib</Name>
     </ProjectReference>

@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28010.2046
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PolynomialLib", "PolinomialLib\PolynomialLib.csproj", "{1D2DFC25-8055-4D95-BF30-580A4519680A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PolynomialLib", "PolynomialLib\PolynomialLib.csproj", "{1D2DFC25-8055-4D95-BF30-580A4519680A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PolynomialLib.Tests", "PolinomialLib.Tests\PolynomialLib.Tests.csproj", "{369C1E17-1104-489C-8A3D-BEE7BDD6FC00}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PolynomialLib.Tests", "PolynomialLib.Tests\PolynomialLib.Tests.csproj", "{369C1E17-1104-489C-8A3D-BEE7BDD6FC00}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

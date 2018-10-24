@@ -163,46 +163,12 @@ namespace PolynomialLib
 
         public static bool operator ==(Polynomial first, Polynomial second)
         {
-            int resultLength = Math.Max(first.GetLength, second.GetLength);
-            bool result = true;
-            for (int i = 0; i < first.GetLength; i++)
-            {
-                if (first.GetLength != second.GetLength)
-                {
-                    result = false;
-                    break;
-                }
-
-                if (Math.Abs(first[i] - second[i]) > double.Epsilon)
-                {
-                    result = false;
-                    break;
-                }
-            }
-
-            return result;
+            return first.Equals(second);
         }
 
         public static bool operator !=(Polynomial first, Polynomial second)
         {
-            int resultLength = Math.Max(first.GetLength, second.GetLength);
-            bool result = false;
-            for (int i = 0; i < first.GetLength; i++)
-            {
-                if (first.GetLength != second.GetLength)
-                {
-                    result = true;
-                    break;
-                }
-
-                if (Math.Abs(first[i] - second[i]) > double.Epsilon)
-                {
-                    result = true;
-                    break;
-                }
-            }
-
-            return result;
+            return !first.Equals(second);
         }
 
         public override bool Equals(object obj)
