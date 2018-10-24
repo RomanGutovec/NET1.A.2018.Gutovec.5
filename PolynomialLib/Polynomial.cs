@@ -6,29 +6,48 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace PolinomialLib
+namespace PolynomialLib
 {
-    public class Polinomial
+    /// <summary>
+    /// Class for work with polynomial members
+    /// </summary>
+    public class Polynomial
     {
         private double[] coefficients;
 
-        public Polinomial(params double[] coefficients)
+        /// <summary>
+        /// Constructor for creating instance of polynomial member
+        /// </summary>
+        /// <param name="coefficients">Coefficients of variables starts from younger (x^0) by queue</param>
+        public Polynomial(params double[] coefficients)
         {
             Coefficients = coefficients;
         }
 
+        /// <summary>
+        /// Coefficients of polynomial member
+        /// <exception cref="NullReferenceException">Thrown when value are set like a null</exception>
+        /// </summary>
         public double[] Coefficients
         {
             get { return coefficients; }
             set { coefficients = value ?? throw new NullReferenceException("Values mustn't be null"); }
         }
-      
+
+        /// <summary>
+        /// Length of polynomial member
+        /// </summary>
         public int GetLength
         {
             get { return coefficients.Length; }
             private set { }
         }
 
+        /// <summary>
+        /// Returns coefficients by chosen index
+        /// </summary>
+        /// <param name="index">index for finding coefficient</param>
+        /// <returns>Returns coefficient by chosen index</returns>
         public double this[int index]
         {
             get
@@ -42,7 +61,7 @@ namespace PolinomialLib
             }
         }
 
-        public static Polinomial operator +(Polinomial first, Polinomial second)
+        public static Polynomial operator +(Polynomial first, Polynomial second)
         {
             int resultLength = Math.Max(first.GetLength, second.GetLength);
             double[] result = new double[resultLength];
@@ -65,10 +84,10 @@ namespace PolinomialLib
                 }
             }
 
-            return new Polinomial(result);
+            return new Polynomial(result);
         }
 
-        public static Polinomial operator -(Polinomial first, Polinomial second)
+        public static Polynomial operator -(Polynomial first, Polynomial second)
         {
             int resultLength = Math.Max(first.GetLength, second.GetLength);
             double[] result = new double[resultLength];
@@ -91,10 +110,10 @@ namespace PolinomialLib
                 }
             }
 
-            return new Polinomial(result);
+            return new Polynomial(result);
         }
 
-        public static Polinomial operator *(Polinomial first, Polinomial second)
+        public static Polynomial operator *(Polynomial first, Polynomial second)
         {
             int resultLength = Math.Max(first.GetLength, second.GetLength);
             double[] result = new double[resultLength];
@@ -117,10 +136,10 @@ namespace PolinomialLib
                 }
             }
 
-            return new Polinomial(result);
+            return new Polynomial(result);
         }
 
-        public static Polinomial operator *(Polinomial first, int number)
+        public static Polynomial operator *(Polynomial first, int number)
         {
             double[] result = new double[first.GetLength];
             for (int i = 0; i < result.Length; i++)
@@ -128,10 +147,10 @@ namespace PolinomialLib
                 result[i] = first[i] * number;
             }
 
-            return new Polinomial(result);
+            return new Polynomial(result);
         }
 
-        public static Polinomial operator *(int number, Polinomial first)
+        public static Polynomial operator *(int number, Polynomial first)
         {
             double[] result = new double[first.GetLength];
             for (int i = 0; i < result.Length; i++)
@@ -139,10 +158,10 @@ namespace PolinomialLib
                 result[i] = first[i] * number;
             }
 
-            return new Polinomial(result);
+            return new Polynomial(result);
         }
 
-        public static bool operator ==(Polinomial first, Polinomial second)
+        public static bool operator ==(Polynomial first, Polynomial second)
         {
             int resultLength = Math.Max(first.GetLength, second.GetLength);
             bool result = true;
@@ -154,7 +173,7 @@ namespace PolinomialLib
                     break;
                 }
 
-                if (first[i] != second[i])
+                if (Math.Abs(first[i] - second[i]) > double.Epsilon)
                 {
                     result = false;
                     break;
@@ -164,7 +183,7 @@ namespace PolinomialLib
             return result;
         }
 
-        public static bool operator !=(Polinomial first, Polinomial second)
+        public static bool operator !=(Polynomial first, Polynomial second)
         {
             int resultLength = Math.Max(first.GetLength, second.GetLength);
             bool result = false;
@@ -176,7 +195,7 @@ namespace PolinomialLib
                     break;
                 }
 
-                if (first[i] != second[i])
+                if (Math.Abs(first[i] - second[i]) > double.Epsilon)
                 {
                     result = true;
                     break;
@@ -193,7 +212,7 @@ namespace PolinomialLib
                 return false;
             }
 
-            Polinomial temp = obj as Polinomial;
+            Polynomial temp = obj as Polynomial;
             bool result = true;
             for (int i = 0; i < this.GetLength; i++)
             {
@@ -203,7 +222,7 @@ namespace PolinomialLib
                     break;
                 }
 
-                if (this[i] != temp[i])
+                if (Math.Abs(this[i] - temp[i]) > double.Epsilon)
                 {
                     result = false;
                     break;

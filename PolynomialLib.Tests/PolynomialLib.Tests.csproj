@@ -54,16 +54,16 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="PolinomialTest.cs" />
+    <Compile Include="PolynomialTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\PolinomialLib\PolinomialLib.csproj">
+    <ProjectReference Include="..\PolinomialLib\PolynomialLib.csproj">
       <Project>{1d2dfc25-8055-4d95-bf30-580a4519680a}</Project>
-      <Name>PolinomialLib</Name>
+      <Name>PolynomialLib</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
