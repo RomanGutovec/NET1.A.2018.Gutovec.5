@@ -11,10 +11,13 @@ namespace PolynomialLib
     /// <summary>
     /// Class for work with polynomial members
     /// </summary>
-    public class Polynomial
+    public class Polynomial : ICloneable, IEquatable<Polynomial>
     {
+        #region field
         private double[] coefficients;
+        #endregion
 
+        #region constructor
         /// <summary>
         /// Constructor for creating instance of polynomial member
         /// </summary>
@@ -23,7 +26,9 @@ namespace PolynomialLib
         {
             Coefficients = coefficients;
         }
+        #endregion
 
+        #region properties
         /// <summary>
         /// Coefficients of polynomial member
         /// <exception cref="NullReferenceException">Thrown when value are set like a null</exception>
@@ -42,7 +47,9 @@ namespace PolynomialLib
             get { return coefficients.Length; }
             private set { }
         }
+        #endregion
 
+        #region indexator
         /// <summary>
         /// Returns coefficients by chosen index
         /// </summary>
@@ -60,7 +67,9 @@ namespace PolynomialLib
                 return coefficients[index];
             }
         }
+        #endregion
 
+        #region operators
         public static Polynomial operator +(Polynomial first, Polynomial second)
         {
             int resultLength = Math.Max(first.GetLength, second.GetLength);
@@ -170,32 +179,17 @@ namespace PolynomialLib
         {
             return !first.Equals(second);
         }
+        #endregion
 
-        public override bool Equals(object obj)
+        #region overrided methods
+        public override bool Equals(object other)
         {
-            if (obj == null)
+            if (!(other is Polynomial))
             {
                 return false;
             }
 
-            Polynomial temp = obj as Polynomial;
-            bool result = true;
-            for (int i = 0; i < this.GetLength; i++)
-            {
-                if (this.GetLength != temp.GetLength)
-                {
-                    result = false;
-                    break;
-                }
-
-                if (Math.Abs(this[i] - temp[i]) > double.Epsilon)
-                {
-                    result = false;
-                    break;
-                }
-            }
-
-            return result;
+            return this.Equals((Polynomial)other);
         }
 
         public override int GetHashCode()
@@ -231,5 +225,41 @@ namespace PolynomialLib
 
             return resultString.ToString();
         }
+        #endregion
+
+        #region implemented method IEqutable
+        public bool Equals(Polynomial other)
+        {
+            if (object.ReferenceEquals(other, null))
+            {
+                return false;
+            }
+
+            bool result = true;
+            for (int i = 0; i < this.GetLength; i++)
+            {
+                if (this.GetLength != other.GetLength)
+                {
+                    result = false;
+                    break;
+                }
+
+                if (Math.Abs(this[i] - other[i]) > double.Epsilon)
+                {
+                    result = false;
+                    break;
+                }
+            }
+
+            return result;
+        }
+        #endregion
+
+        #region implemented method ICloneable
+        public object Clone()
+        {
+            return new Polynomial(Coefficients);
+        }
+        #endregion
     }
 }

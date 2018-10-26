@@ -166,7 +166,8 @@ namespace PolynomialLib.Tests
             Polynomial testPolynomialFirst = new Polynomial(coefficientsFirst);
             Polynomial testPolynomialSecond = new Polynomial(coefficientsSecond);
 
-            return testPolynomialFirst.Equals(testPolynomialSecond);
+            bool result=testPolynomialFirst.Equals(testPolynomialSecond);
+            return result;
         }
     }
 }
