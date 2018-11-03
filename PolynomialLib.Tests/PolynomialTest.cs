@@ -13,12 +13,12 @@ namespace PolynomialLib.Tests
         [TestCase(new double[] { 2.5, 4.5, 7.5 }, ExpectedResult = 3)]
         public int LengthPropertyTest(double[] coefficients)
         {
-            return new Polynomial(coefficients).GetLength;
+            return new Polynomial(coefficients).Degree;
         }
 
         [Test]
         public void ConstructorTest()
-        => Assert.Throws<NullReferenceException>(() => new Polynomial(null));
+        => Assert.Throws<ArgumentNullException>(() => new Polynomial(null));
 
         [TestCase(new double[] { 1.3569 }, 0, ExpectedResult = 1.3569)]
         [TestCase(new double[] { 2.84, 3.15 }, 1, ExpectedResult = 3.15)]
@@ -50,16 +50,16 @@ namespace PolynomialLib.Tests
         {
             Polynomial testPolynomialFirst = new Polynomial(coefficientsFirst);
             Polynomial testPolynomialSecond = new Polynomial(coefficientsSecond);
-            Polynomial actual = new Polynomial();
+            Polynomial actual;
             actual = testPolynomialFirst + testPolynomialSecond;
 
-            double[] expected = new double[testPolynomialFirst.GetLength];
-            for (int i = 0; i < testPolynomialSecond.GetLength; i++)
+            double[] expected = new double[testPolynomialFirst.Degree];
+            for (int i = 0; i < testPolynomialSecond.Degree; i++)
             {
                 expected[i] = testPolynomialFirst[i] + testPolynomialSecond[i];
             }
 
-            for (int i = testPolynomialSecond.GetLength; i < testPolynomialFirst.GetLength; i++)
+            for (int i = testPolynomialSecond.Degree; i < testPolynomialFirst.Degree; i++)
             {
                 expected[i] = testPolynomialFirst[i];
             }
@@ -76,16 +76,15 @@ namespace PolynomialLib.Tests
         {
             Polynomial testPolynomialFirst = new Polynomial(coefficientsFirst);
             Polynomial testPolynomialSecond = new Polynomial(coefficientsSecond);
-            Polynomial actual = new Polynomial();
-            actual = testPolynomialFirst - testPolynomialSecond;
+            Polynomial actual = testPolynomialFirst - testPolynomialSecond;
 
-            double[] expected = new double[testPolynomialFirst.GetLength];
-            for (int i = 0; i < testPolynomialSecond.GetLength; i++)
+            double[] expected = new double[testPolynomialFirst.Degree];
+            for (int i = 0; i < testPolynomialSecond.Degree; i++)
             {
                 expected[i] = testPolynomialFirst[i] - testPolynomialSecond[i];
             }
 
-            for (int i = testPolynomialSecond.GetLength; i < testPolynomialFirst.GetLength; i++)
+            for (int i = testPolynomialSecond.Degree; i < testPolynomialFirst.Degree; i++)
             {
                 expected[i] = testPolynomialFirst[i];
             }
@@ -102,39 +101,38 @@ namespace PolynomialLib.Tests
         {
             Polynomial testPolynomialFirst = new Polynomial(coefficientsFirst);
             Polynomial testPolynomialSecond = new Polynomial(coefficientsSecond);
-            Polynomial actual = new Polynomial();
-            actual = testPolynomialFirst * testPolynomialSecond;
-
-            double[] expected = new double[testPolynomialFirst.GetLength];
-            for (int i = 0; i < testPolynomialSecond.GetLength; i++)
+            
+            double[] expected = new double[testPolynomialFirst.Degree];
+            for (int i = 0; i < testPolynomialSecond.Degree; i++)
             {
                 expected[i] = testPolynomialFirst[i] * testPolynomialSecond[i];
             }
 
-            for (int i = testPolynomialSecond.GetLength; i < testPolynomialFirst.GetLength; i++)
+            for (int i = testPolynomialSecond.Degree; i < testPolynomialFirst.Degree; i++)
             {
                 expected[i] = testPolynomialFirst[i];
             }
 
-            CollectionAssert.AreEqual(expected, actual.Coefficients);
+            CollectionAssert.AreEqual(expected, (testPolynomialFirst* testPolynomialSecond).Coefficients);
         }
 
         [TestCase(new double[] { 3.1, 1.3, 2.2 }, 2)]
         [TestCase(new double[] { 1.1, 4.2 }, 3)]
-        [TestCase(new double[] { 2.5, -3, 4.1 }, -2)]
+        [TestCase(new double[] { 2.5, -3, 4.1 }, 2)]
         public void OperatorMultiplyWithNumber_ReturnsValueOfCoefficientByIndex(double[] coefficientsFirst, int number)
         {
             Polynomial testPolynomial = new Polynomial(coefficientsFirst);
 
-            Polynomial actual = new Polynomial();
-            actual = testPolynomial * number;
+            Polynomial actual = testPolynomial * number;
+            //Polynomial actual = testPolynomial * number;
 
-            double[] expected = new double[testPolynomial.GetLength];
-            for (int i = 0; i < testPolynomial.GetLength; i++)
+            double[] expected = new double[testPolynomial.Degree];
+            for (int i = 0; i < testPolynomial.Degree; i++)
             {
                 expected[i] = testPolynomial[i] * number;
             }
-
+            //double[] actual = testPolynomial.Coefficients * number;
+            //double[] actual = (testPolynomial * number).Coefficients;
             CollectionAssert.AreEqual(expected, actual.Coefficients);
         }
 
